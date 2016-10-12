@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5">
-      Recipes List
+      <app-recipe-list (recipeSelected)="selectedRecipe = $event"> </app-recipe-list>
     </div>
     <div class="col-md-7">
-      Recipes Details
+      <app-recipe-detail [selectedRecipe]="selectedRecipe"></app-recipe-detail>
     </div>
   </div>
 </div>
