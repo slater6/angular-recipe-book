@@ -4,7 +4,9 @@
       <app-shopping-list-add></app-shopping-list-add>
       <hr>
       <ul class="list-group">
-        <a href="" class="list-group-item"></a>
+        <li href="" class="list-group-item" *ngFor="let item of items">
+          <a href="">{{ item.name }} (Quantity:{{ item.amount }})</a>
+        </li>
       </ul>
     </div>
   </div>
