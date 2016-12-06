@@ -9,7 +9,7 @@
           id="item-name"
           class="form-control"
           required
-          ngModel
+          [ngModel]="item.name"
           name="name">
         </div>
         <div class="col-sm-2 form-group">
@@ -19,14 +19,14 @@
           id="item-name"
           class="form-control"
           required
-          ngModel
+          [ngModel]="item.amount"
           name="amount">
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
           <button class="btn btn-success" type="submit" *ngIf="isAdd" [disabled]="!f.valid">Add</button>
-          <button class="btn btn-danger" type="submit" *ngIf="!isAdd">Edit</button>
+          <button class="btn btn-success" type="submit" *ngIf="!isAdd">Save</button>
           <button class="btn btn-danger" type="button" *ngIf="!isAdd">Delete</button>
           <button class="btn btn-primary" type="button" *ngIf="!isAdd">Clear</button>
         </div>
