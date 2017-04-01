@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10">
+      <app-shopping-list-add [item]="selectedItem" (cleared)="onCleared()"></app-shopping-list-add>
+      <hr>
+      <ul class="list-group">
+        <li href="" class="list-group-item" *ngFor="let item of items">
+          <a (click)="onSelectItem(item)">{{ item.name }} (Quantity:{{ item.amount }})</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
