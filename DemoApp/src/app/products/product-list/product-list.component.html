@@ -1,16 +1,27 @@
 <h2>
-  {{title}} - 
-  {favorites, plural,
-      =0 {no favourite}
-      =1 {1 favourite}
-      other {{{favorites}} favorites}
-  }
+  {{title}} - {{favorites | i18nPlural: favoritesMessage}}
 </h2>
 
-<ul class="products">
-  <li *ngFor="let product of products"
+<ng-template #loading>
+  <h2>Loading Products</h2>
+</ng-template>
+
+<ul class="products" *ngIf="products$ | async as products; else loading">
+  <li>
+    <span class="name">
+      <button type="button" (click)="toggleOrder('name')">Toggle Order</button>
+    </span>
+    <span class="description">
+      <button type="button" (click)="toggleOrder('description')">Toggle Order</button>
+    </span>
+    <span class="price">
+      <button type="button" (click)="toggleOrder('price')">Toggle Order</button>
+    </span>
+  </li>
+  <li *ngFor="let product of products | orderBy:[sorter] | slice:this.start:this.end"
    (click)="onSelect(product)"
    [class.selected]="product === selectedProduct"
+   [title]="product | json"
    [class.discontinued]="product.discontinued">
     
    <span class="name">{{product.name | uppercase }}</span> 
@@ -18,5 +29,14 @@
    <span class="price">{{product.price | currency:'USD':true:'.2'}}</span> 
   </li>
 </ul>
+
+<div>
+  <button type="button" class="btn" (click)="previousPage()" [disabled]="start === 0">
+    Previous Page
+  </button>
+  <button type="button" class="btn" (click)="nextPage()"  [disabled]="(products$ | async)?.length <= end">
+    Next Page
+  </button>
+</div>
 
 <app-product-detail [product]="selectedProduct"></app-product-detail>
